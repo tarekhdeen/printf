@@ -45,7 +45,7 @@ int _printf(const char *format, ...)
 		format++;
 	}
 
-	flush_buffer(buffer, &buffer_index)
+	flush_buffer(buffer, &buffer_index);
 
 	va_end(args);
 	return (count);

@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
 #include <string.h>
@@ -16,7 +17,8 @@
  * Return: 0
  */
 int handle_format_specifier(
-const char *format, va_list args, char *buffer, int *buffer_index, int *count)
+		const char *format, va_list args,
+		char *buffer, int *buffer_index, int *count)
 {
 	switch (*format)
 	{
@@ -39,6 +41,10 @@ const char *format, va_list args, char *buffer, int *buffer_index, int *count)
 			return (handle_hex_lower(args, buffer, buffer_index, count));
 		case 'X':
 			return (handle_hex_upper(args, buffer, buffer_index, count));
+		case 'S':
+			return (handle_S(args, buffer, buffer_index, count));
+		case 'p':
+			return (handle_p(args, buffer, buffer_index, count));
 		default:
 			return (-1);
 	}

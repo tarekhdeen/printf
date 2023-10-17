@@ -16,7 +16,8 @@
  *
  * Return: 0
  */
-int handle_character(va_list args, char *buffer, int *buffer_index, int *count)
+int handle_character(
+		va_list args, char *buffer, int *buffer_index, int *count)
 {
 	char c = va_arg(args, int);
 
@@ -24,7 +25,6 @@ int handle_character(va_list args, char *buffer, int *buffer_index, int *count)
 	{
 		return (-1);
 	}
-
 	print_char(c, buffer, buffer_index, count);
 	return (0);
 }
@@ -47,6 +47,7 @@ int handle_string(va_list args, char *buffer, int *buffer_index, int *count)
 	{
 		return (-1);
 	}
+
 	return (0);
 }
 
@@ -84,6 +85,7 @@ int handle_integer(va_list args, char *buffer, int *buffer_index, int *count)
 	int num = va_arg(args, int);
 	int temp, result, i, digits = 0;
 
+
 	while (temp != 0)
 	{
 		temp /= 10;
@@ -95,6 +97,7 @@ int handle_integer(va_list args, char *buffer, int *buffer_index, int *count)
 	{
 		exit(EXIT_FAILURE);
 	}
+
 	for (i = digits - 1; i >= 0; i--)
 	{
 		num_str[i] = '0' + num % 10;
