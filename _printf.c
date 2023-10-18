@@ -1,45 +1,50 @@
-#include <stdio.h>
-#include <stdarg.h>
-#include <unistd.h>
-#include <string.h>
 #include "main.h"
+#include <stdio.h>
 
 /**
- * _printf - printf
- * @format: const char
+ * _printf - prints anything
+ * @format: the format string
  *
- * Return: count
+ * Return: number of bytes printed
  */
 int _printf(const char *format, ...)
 {
-	int count = 0;
-	va_list args;
+	int sum = 0;
+	va_list ap;
+	char *c, *start;
+	params_t params = PARAMS_INIT;
 
-	va_start(args, format);
+	va_start(ap, format);
 
-	if (format == NULL)
-	{
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	}
-
-	while (*format != '\0')
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (c = (char *)format; *p; p++)
 	{
-		if (*format == '%')
+		init_params(&params, ap);
+		if (*c != '%')
 		{
-			format++;
-			if (handle_format_specifier(format, args, &count) == -1)
-			{
-				return (-1);
-			}
+			sum += _putchar(*c);
+			continue;
 		}
+		start = c;
+		c++;
+		while (get_flag(p, &params))
+		{
+			c++;
+		}
+		c = get_width(p, &params, ap);
+		c = get_precision(p, &params, ap);
+		if (get_modifier(c, &params))
+			c++;
+		if (!get_specifier(c))
+			sum += print_from_to(start, c,
+					params.l_modifier || params.h_modifier ? c - 1 : 0);
 		else
-		{
-			print_char(*format);
-			count++;
-		}
-		format++;
+			sum += get_print_func(c, ap, &params);
 	}
-
-	va_end(args);
-	return (count);
+	_putchar(BUF_FLUSH);
+	va_end(ap);
+	return (sum);
 }
