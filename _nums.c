@@ -2,12 +2,12 @@
 
 /**
  * convert - converter function, a clone of itoa
- * 
+ *
  * @nu: number
  * @b: base
  * @fl: argument flags
  * @params: paramater struct
- * 
+ *
  * Return: string
 */
 char *convert(long int nu, int b, int fl, params_t *params)
